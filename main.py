@@ -57,9 +57,9 @@ def add_buttons(window):
 def main():
     window = glw.Window(window_width, window_height, (255, 255, 255))
     add_buttons(window)
-    window.add_text_box((255, 255, 255), 0, 0, 100, 700, gui.LEFT_TEXT_BOX)
-    window.add_button((100, 100, 100), 0, 700, 100, 20, gui.LEFT_TEXT_BOX, 'Clear text', CommandType.CLEAR_TEXT)
-    window.add_button((100, 100, 100), 0, 730, 100, 20, gui.LEFT_TEXT_BOX, 'Add row', CommandType.ADD_ROW)
+    window.add_text_box((255, 255, 255), 10, button_start_y, button_start_x - 20, 700, gui.LEFT_TEXT_BOX)
+    window.add_button((100, 100, 100), button_start_x/2 - 100 - 5   , button_start_y + 700 + 10, 100, 20, gui.LEFT_TEXT_BOX, 'Clear text', CommandType.CLEAR_TEXT)
+    window.add_button((100, 100, 100), button_start_x/2 + 5         , button_start_y + 700 + 10, 100, 20, gui.LEFT_TEXT_BOX, 'Add row', CommandType.ADD_ROW)
     window.on_execute()
 
 
