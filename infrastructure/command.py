@@ -4,6 +4,8 @@ class CommandType(Enum):
     NONE = 0
     MOVE = 1
     SELECT_PIECE = 2
+    CLEAR_TEXT = 3
+    ADD_ROW = 4
 
 class Command:
     def __init__(self):
@@ -18,8 +20,8 @@ class Command:
         self.message_queue = tmp
         return cmd
     
-    def add_message(self, command):
-        self.message_queue.append(command)
+    def add_message(self, command, component_id):
+        self.message_queue.append((command, component_id))
 
     def has_message(self):
         return len(self.message_queue) > 0
