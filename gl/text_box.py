@@ -53,6 +53,6 @@ class TextBox:
         for row in self.rows:
             font = pygame.font.SysFont('arial', self.text_size, 1)
             text = font.render(row.text, 1, (0, 0, 0))
-            window.blit(text, (row.x + (self.width/2 - text.get_width()/2), row.y + (row.height/2 - text.get_height()/2)))
+            window.blit(text, (row.x, row.y + (row.height/2 - text.get_height()/2)))
 
 
