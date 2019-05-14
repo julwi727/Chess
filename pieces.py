@@ -14,8 +14,3 @@ class Piece():
 
     def __str__(self):
         return self.piece_type.name
-
-
-p = Piece(PieceType.KING)
-
-print(p)
