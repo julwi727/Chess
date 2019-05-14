@@ -2,16 +2,22 @@
 import pygame
 import gl.window as glw
 from infrastructure.command import CommandType
+import gui_id as gui
 
-window_width = 800
-window_height = 600
+window_width = 1440
+window_height = 900
 
-button_width = (window_height - 100) /8
+button_width = int((window_height - 100) /8)
 button_height = button_width
 button_color_light = (195, 195, 195)
 button_color_dark = (100, 100, 100)
-button_start_x = window_width/2 - 4*button_width
-button_start_y = window_height/2 - 4*button_height
+button_start_x = int(window_width/2 - 4*button_width)
+button_start_y = int(window_height/2 - 4*button_height)
+
+print("Button width: " + str(button_width))
+print("Button height: " + str(button_height))
+print("Button start x: " + str(button_start_x))
+print("Button start y: " + str(button_start_y))
 
 def add_buttons(window):
     y = button_start_y
@@ -44,17 +50,16 @@ def add_buttons(window):
             ]
 
         for j in range(8):
-            window.add_button(colors[j], x, y, button_width, button_height, '', CommandType.SELECT_PIECE)
+            window.add_button(colors[j], x, y, button_width, button_height, -1, '', CommandType.SELECT_PIECE)
             x += button_width
-        
         y += button_height
-                
-
-
 
 def main():
     window = glw.Window(window_width, window_height, (255, 255, 255))
     add_buttons(window)
+    window.add_text_box((255, 255, 255), 0, 0, 100, 700, gui.LEFT_TEXT_BOX)
+    window.add_button((100, 100, 100), 0, 700, 100, 20, gui.LEFT_TEXT_BOX, 'Clear text', CommandType.CLEAR_TEXT)
+    window.add_button((100, 100, 100), 0, 730, 100, 20, gui.LEFT_TEXT_BOX, 'Add row', CommandType.ADD_ROW)
     window.on_execute()
 
 
