@@ -44,7 +44,7 @@ class TextBox:
     
     def draw(self, window):
         #Outline
-        #pygame.draw.rect(window, (0,0,0), (self.x - 2, self.y - 2, self.width + 4, self.height + 4, 0))
+        pygame.draw.rect(window, (0,0,0), (self.x - 1, self.y - 1, self.width + 2, self.height + 2), 0)
         
         #Background rect
         pygame.draw.rect(window, self.color, (self.x, self.y, self.width, self.height), 0)
