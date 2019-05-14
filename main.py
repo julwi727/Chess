@@ -44,7 +44,7 @@ def add_buttons(window):
             ]
 
         for j in range(8):
-            window.add_button(colors[j], x, y, button_width, button_height, '', CommandType.MOVE)
+            window.add_button(colors[j], x, y, button_width, button_height, '', CommandType.SELECT_PIECE)
             x += button_width
         
         y += button_height

@@ -33,8 +33,11 @@ class Window:
     def on_loop(self):
         if self.message_queue.has_message():
             command = self.message_queue.get_message()
+            
             if command == cmd.CommandType.MOVE:
-                print("Move!")
+                print("Move")
+            if command == cmd.CommandType.SELECT_PIECE:
+                print("Select")
         
     def on_render(self):
         self._display_surf.fill(self.fill_color)

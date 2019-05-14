@@ -3,6 +3,7 @@ from enum import Enum
 class CommandType(Enum):
     NONE = 0
     MOVE = 1
+    SELECT_PIECE = 2
 
 class Command:
     def __init__(self):
