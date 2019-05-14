@@ -7,7 +7,8 @@ class ButtonState(Enum):
     UNSELECTED = 2
 
 class Button:
-    def __init__(self, color, x, y, width, height, text='', command=0):
+    def __init__(self, color, x, y, width, height, component_id, text='', command=0):
+        self.component_id = component_id
         self.color = color
         self.original_color = color
         self.x = x
@@ -25,7 +26,7 @@ class Button:
         pygame.draw.rect(window, self.color, (self.x, self.y, self.width, self.height), 0)
 
         if self.text != '':
-            font = pygame.font.SysFont('arial', 30, 1)
+            font = pygame.font.SysFont('arial', 15, 1)
             text = font.render(self.text, 1, (0, 0, 0))
             window.blit(text, (self.x + (self.width/2 - text.get_width()/2), self.y + (self.height/2 - text.get_height()/2)))
 
