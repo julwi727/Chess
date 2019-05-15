@@ -39,7 +39,7 @@ class TextBox:
     def add_row(self, text):
         self.rows[self.current_row].text = text
         self.current_row += 1
-        if self.current_row == len(self.rows) - 1:
+        if self.current_row == len(self.rows):
             self.current_row -= 1
     
     def draw(self, window):

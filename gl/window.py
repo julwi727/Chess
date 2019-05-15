@@ -3,6 +3,8 @@ import gl.button as glb
 import gl.text_box as gltb
 import infrastructure.command as cmd
 import gui_id as gui
+import game.board
+import properties
 from pygame.locals import *
  
 class Window:
@@ -14,7 +16,8 @@ class Window:
         self.buttons = []
         self.text_boxes = []
         self.selected_button = None
-        self.message_queue = cmd.Command()
+        self.message_queue = cmd.command_queue
+        self.board = None
  
     def on_init(self):
         pygame.init()
@@ -39,12 +42,21 @@ class Window:
             
             if command[0] == cmd.CommandType.MOVE:
                 print("Move")
+
             if command[0] == cmd.CommandType.SELECT_PIECE:
                 print("Select")
+
             if command[0] == cmd.CommandType.CLEAR_TEXT:
                 self.clear_text(command[1])
+
             if command[0] == cmd.CommandType.ADD_ROW:
-                self.add_row(command[1])
+                self.add_row(command[1], command[2])
+
+            if command[0] == cmd.CommandType.MAKE_MOVE:
+                self.board.make_move()
+
+            if command[0] == cmd.CommandType.RESET_BOARD:
+                self.board.reset()
 
         
     def on_render(self):
@@ -54,6 +66,9 @@ class Window:
         
         for text_box in self.text_boxes:
             text_box.draw(self._display_surf)
+
+        if self.board:
+            self.board.draw(self._display_surf)
 
         pygame.display.update()
 
@@ -70,6 +85,10 @@ class Window:
             self.on_loop()
             self.on_render()
         self.on_cleanup()
+
+    #====GUI methods====
+    def add_board(self, board):
+        self.board = board
 
     def add_button(self, color, x, y, width, height, component_id, text='', command=''):
         self.buttons.append(glb.Button(color, x, y, width, height, component_id, text, command))
@@ -88,6 +107,8 @@ class Window:
             if button.hit(pos):
                 self.message_queue.add_message(button.command, button.component_id)
 
+        self.board.check_command(pos)
+
     def deselect_last(self):
         if self.selected_button != None:
             self.selected_button.toggle_select()
@@ -99,8 +120,8 @@ class Window:
             if text_box.component_id == component_id:
                 text_box.clear()
 
-    def add_row(self, component_id):
+    def add_row(self, component_id, text):
         print("Add row to text_box with id: " + str(component_id))
         for text_box in self.text_boxes:
             if text_box.component_id == component_id:
-                text_box.add_row("Hej")
+                text_box.add_row(text)
